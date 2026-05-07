@@ -2012,7 +2012,9 @@ PX_retrieve_record(pxdoc_t *pxdoc, int recno) {
 					double value;
 					if(0 < PX_get_data_double(pxdoc, &data[offset], pxf->px_flen, &value)) {
 						dataptr[i]->value.dval = value;
-					} 
+					} else {
+						dataptr[i]->isnull = 1;
+					}
 					break;
 					} 
 				case pxfLogical: {
