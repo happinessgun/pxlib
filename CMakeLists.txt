@@ -37,9 +37,11 @@ include(CheckFunctionExists)
 include(CheckLibraryExists)
 
 # Check for iconv via CMake's modern Iconv module (CMake 3.11+)
-find_package(Iconv REQUIRED)
-set(HAVE_ICONV 1)
-set(ICONV_LIBRARIES Iconv::Iconv)
+find_package(Iconv)
+if(Iconv_FOUND)
+    set(HAVE_ICONV 1)
+    set(ICONV_LIBRARIES Iconv::Iconv)
+endif()
 
 # Endianess
 include(TestBigEndian)
