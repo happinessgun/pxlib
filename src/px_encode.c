@@ -46,7 +46,7 @@ int px_set_targetencoding(pxdoc_t *pxdoc) {
 #else
 #if PX_USE_ICONV
 		sprintf(buffer, "CP%d", pxdoc->px_head->px_doscodepage);
-		if(pxdoc->out_iconvcd > 0)
+		if(pxdoc->out_iconvcd != (iconv_t) -1)
 			iconv_close(pxdoc->out_iconvcd);
 		if((iconv_t)(-1) == (pxdoc->out_iconvcd = iconv_open(pxdoc->targetencoding, buffer))) {
 			return -1;
@@ -73,7 +73,7 @@ int px_set_inputencoding(pxdoc_t *pxdoc) {
 #else
 #if PX_USE_ICONV
 		sprintf(buffer, "CP%d", pxdoc->px_head->px_doscodepage);
-		if(pxdoc->in_iconvcd > 0)
+		if(pxdoc->in_iconvcd != (iconv_t) -1)
 			iconv_close(pxdoc->in_iconvcd);
 		if((iconv_t)(-1) == (pxdoc->in_iconvcd = iconv_open(buffer, pxdoc->inputencoding))) {
 			return -1;
